@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -11,6 +12,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import org.openjfx.enums.ColumnWidth;
 
+import static javafx.scene.text.FontPosture.REGULAR;
+import static javafx.scene.text.FontWeight.BOLD;
 import static org.openjfx.utils.Pad.padLeftZeros;
 
 public class Clock {
@@ -18,13 +21,13 @@ public class Clock {
     private int seconds = 0;
     private Timeline clock;
 
-    public Text setup() {
-        text.setFont(Font.font(20));
+    public Group setup() {
+        text.setFont(Font.font("verdana", BOLD, REGULAR, 24));
         text.setFill(Color.WHITE);
-        text.setWrappingWidth(ColumnWidth.SECOND.width);
+        text.setWrappingWidth(ColumnWidth.MIDDLE.width);
         text.setTextAlignment(TextAlignment.RIGHT);
 
-        return text;
+        return new Group(text);
     }
 
     @FXML

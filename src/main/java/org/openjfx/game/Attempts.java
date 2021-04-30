@@ -1,5 +1,6 @@
 package org.openjfx.game;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -18,7 +19,7 @@ public class Attempts {
         if(instance.life > 0) --instance.life;
     }
 
-    public static Text attemptText() {
+    public static Group attemptText() {
         if(instance == null) instance = new Attempts();
 
         String symbol = Character.toString('\u2665');
@@ -28,20 +29,20 @@ public class Attempts {
         text.setFill(Color.WHITE);
         text.setWrappingWidth(ColumnWidth.FIRST.width);
 
-        return text;
+        return new Group(text);
     }
 
     public static boolean isAlive() {
         return instance.life > 1;
     }
 
-    public static Text gameOverText() {
+    public static Group gameOverText() {
         Text text = new Text("Game Over!");
 
         text.setFont(Font.font("verdana", BOLD, REGULAR, 24));
         text.setFill(Color.WHITE);
         text.setWrappingWidth(ColumnWidth.FIRST.width);
 
-        return text;
+        return new Group(text);
     }
 }

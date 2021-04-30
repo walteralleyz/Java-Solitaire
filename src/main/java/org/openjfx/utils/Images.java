@@ -2,6 +2,7 @@ package org.openjfx.utils;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.openjfx.enums.ColumnWidth;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,8 +16,8 @@ public class Images {
             Image image = new Image(inputStream);
             ImageView view = new ImageView(image);
 
-            view.setFitHeight(63 * scale);
-            view.setFitWidth((662d / 13d) * scale);
+            view.setFitHeight(92 * scale);
+            view.setFitWidth((ColumnWidth.BOTH.width / 13d) * scale);
 
             return view;
         } catch (FileNotFoundException e) {

@@ -8,7 +8,7 @@ import static org.openjfx.utils.Roles.roles;
 
 public class DeckExtension {
     public static Deck populateDeck() {
-        Deck temp = Deck.getMutableInstance();
+        Deck temp = new Deck();
 
         for(String role : roles) {
             for(int card = CardNumber.ACE.number; card <= CardNumber.KING.number ; card++) {
@@ -19,6 +19,6 @@ public class DeckExtension {
         }
 
         temp.shuffleDeck();
-        return new Deck(temp);
+        return temp;
     }
 }

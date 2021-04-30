@@ -2,6 +2,7 @@ package org.openjfx.cards;
 
 import javafx.scene.image.ImageView;
 import org.openjfx.enums.CardSize;
+import org.openjfx.game.History;
 
 import java.util.Stack;
 
@@ -23,11 +24,17 @@ public class Cards {
         return createCardImage("faces", 1, CardSize.SMALL.size);
     }
 
-    public ImageView getCardsFace(String type) { return types.getCardsFace(type); }
-
-    public ImageView getStacksFace(int stackPos) { return stacks.showCardFace(stackPos); }
+    public ImageView getResetDeckFace() {
+        return createCardImage("faces", 2, CardSize.SMALL.size);
+    }
 
     public boolean isDeckEmpty() {
         return deck.isEmpty();
     }
+
+    public Stacks getStacks() {
+        return stacks;
+    }
+
+    public Types getTypes() { return types; }
 }

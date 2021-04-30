@@ -1,21 +1,20 @@
 package org.openjfx.extension;
 
+import org.openjfx.cards.Deck;
 import org.openjfx.cards.Types;
-
-import java.util.Stack;
 
 import static org.openjfx.utils.Roles.roles;
 
 public class TypesExtension {
     public static Types populateTypes() {
-        Types types = Types.getMutableInstance();
+        Types types = new Types();
 
-        for(String role : roles) {
-            Stack<Integer> roleDeck = new Stack<>();
+        for(int roleIndex = 0; roleIndex < roles.size(); roleIndex++) {
+            Deck roleDeck = new Deck();
 
-            types.getMemory().put(role, roleDeck);
+            types.getMemory().add(roleDeck);
         }
 
-        return new Types(types);
+        return types;
     }
 }
