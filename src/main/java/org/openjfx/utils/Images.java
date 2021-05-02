@@ -7,9 +7,11 @@ import org.openjfx.enums.ColumnWidth;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import static org.openjfx.enums.Dir.*;
+
 public class Images {
     public static ImageView createCardImage(String type, int number, double scale) {
-        String url = String.format("src/%s/%s/%d.png", Dir.ASSETS, type, number);
+        String url = String.format("%s/%s/%s/%d.png", ROOT.dir, ASSETS.dir, type, number);
 
         try {
             FileInputStream inputStream = new FileInputStream(url);

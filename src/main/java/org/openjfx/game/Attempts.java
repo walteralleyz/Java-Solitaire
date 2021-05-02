@@ -1,13 +1,11 @@
 package org.openjfx.game;
 
-import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.openjfx.enums.ColumnWidth;
 
-import static javafx.scene.text.FontPosture.REGULAR;
-import static javafx.scene.text.FontWeight.BOLD;
+import static org.openjfx.utils.Path.loadFont;
 
 public class Attempts {
     private static Attempts instance;
@@ -19,30 +17,42 @@ public class Attempts {
         if(instance.life > 0) --instance.life;
     }
 
-    public static Group attemptText() {
+    public static Text attemptText() {
         if(instance == null) instance = new Attempts();
 
-        String symbol = Character.toString('\u2665');
-        Text text = new Text(String.format("%s%d", symbol, instance.life));
+        Font font = loadFont();
+        Text text = new Text("try " + instance.life);
 
-        text.setFont(Font.font("verdana", BOLD, REGULAR, 24));
+        text.setFont(font);
         text.setFill(Color.WHITE);
         text.setWrappingWidth(ColumnWidth.FIRST.width);
 
-        return new Group(text);
+        return text;
     }
 
     public static boolean isAlive() {
-        return instance.life > 1;
+        return instance.life >= 1;
     }
 
-    public static Group gameOverText() {
-        Text text = new Text("Game Over!");
+    public static Text gameOverText() {
+        Font font = loadFont();
+        Text text = new Text("Game Over");
 
-        text.setFont(Font.font("verdana", BOLD, REGULAR, 24));
+        text.setFont(font);
         text.setFill(Color.WHITE);
-        text.setWrappingWidth(ColumnWidth.FIRST.width);
+        text.setWrappingWidth(ColumnWidth.MIDDLE.width);
 
-        return new Group(text);
+        return text;
+    }
+
+    public static Text winnerText() {
+        Font font = loadFont();
+        Text text = new Text("You Win");
+
+        text.setFont(font);
+        text.setFill(Color.WHITE);
+        text.setWrappingWidth(ColumnWidth.MIDDLE.width);
+
+        return text;
     }
 }

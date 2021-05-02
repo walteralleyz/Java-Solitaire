@@ -2,15 +2,20 @@ package org.openjfx.game;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
-import org.openjfx.cards.Cards;
-import org.openjfx.cards.SideDeck;
+import org.openjfx.cards.*;
 import org.openjfx.layout.Grids;
 import org.openjfx.layout.Pane;
 
+import static org.openjfx.cards.Types.isAWin;
+import static org.openjfx.extension.DeckExtension.populateDeck;
+import static org.openjfx.extension.StackExtension.populateStacks;
+import static org.openjfx.extension.TypesExtension.populateTypes;
 import static org.openjfx.game.Attempts.*;
 
 public class Game {
-    private final Cards cards = new Cards();
+    private final Deck deck = populateDeck();
+    private final Types types = populateTypes();
+    private final Stacks stacks = populateStacks(deck);
     private final SideDeck sideDeck = new SideDeck();
     private final Grids grids = new Grids();
     private final Clock clock = new Clock();
@@ -18,15 +23,13 @@ public class Game {
     private final History history = new History(this);
 
     public Pane setup() {
-        nextDeckCard();
-
         grids.addTo("deck", createDeckFace());
+        grids.addTo("sideDeck", sideDeck.getNextCardFace(history));
         grids.addTo("clock", clock.setup());
         grids.addTo("attempt", attemptText());
-        grids.addTo("type", cards.getTypes().createTypesFace(history));
-        grids.addTo("stack", cards.getStacks().createDecks(history));
-        grids.addTo("music", setupMusicPlayer());
-        grids.addTo("sideDeck", createSideDeckFace());
+        grids.addTo("type", types.createTypesFace(history));
+        grids.addTo("stack", stacks.createDecks(history));
+        grids.addTo("music", new MusicPlayer().setup());
 
         grids.alignGridContent("music", Pos.TOP_RIGHT);
         clock.initialize();
@@ -35,60 +38,54 @@ public class Game {
     }
 
     public void update() {
-        grids.setTo("type", 0, cards.getTypes().createTypesFace(history));
-        grids.setTo("stack", 0, cards.getStacks().createDecks(history));
-        grids.setTo("sideDeck", 0, createSideDeckFace());
-    }
+        types.verifyAllTypes();
 
-    public void flipNextCard() {
-        if(cards.isDeckEmpty()) resetDeck();
-        else {
-            nextDeckCard();
-            update();
+        grids.setTo("deck", createDeckFace());
+        grids.setTo("sideDeck", sideDeck.getNextCardFace(history));
+        grids.setTo("attempt", attemptText());
+        grids.setTo("type", types.createTypesFace(history));
+        grids.setTo("stack", stacks.createDecks(history));
+
+        if(isAlive() && isAWin()) {
+            grids.setTo("clock", winnerText());
+            clock.stop();
+        }
+
+        else if(!isAlive()) {
+            grids.setTo("clock", gameOverText());
+            clock.stop();
         }
     }
 
-    public void resetDeck() {
-        ImageView reset = cards.getResetDeckFace();
+    public ImageView resetDeck() {
+        ImageView reset = Card.getCardReset();
         reset.setOnMouseClicked(event -> {
-            if(isAlive()) {
-                tookDamage();
+            tookDamage();
+            deck.copyFromStack(sideDeck.getDeck());
 
-                cards.createNewDeck(sideDeck.getMemory());
-                grids.setToChildren("deck", 0, createDeckFace());
-                grids.setToChildren("attempt", 0, attemptText());
-            }
-
-            else {
-                grids.setToChildren("attempt", 0, gameOverText());
-                clock.stop();
-            }
+            update();
         });
 
-        grids.setToChildren("deck", 0, reset);
+        return reset;
     }
 
-    public void nextDeckCard() {
-        sideDeck.addCard(cards.getNextCard());
-    }
-
-    public ImageView setupMusicPlayer() {
-        MusicPlayer player = new MusicPlayer();
-        return player.setup();
-    }
-
-    public ImageView createSideDeckFace() {
-        try { return sideDeck.getNextCardFace(history); }
-        catch (Exception e) { return new ImageView(); }
-    }
-
-    public ImageView createDeckFace() {
-        ImageView deckFace = cards.getDeckFace();
+    public ImageView backDeck() {
+        ImageView deckFace = Card.getCardBack();
         deckFace.setOnMouseClicked(event -> {
-            flipNextCard();
+            nextDeckCard();
             history.cleanCard();
         });
 
         return deckFace;
+    }
+
+    public void nextDeckCard() {
+        sideDeck.addCard(deck.popCard());
+        update();
+    }
+
+    public ImageView createDeckFace() {
+        if(deck.isEmpty()) return resetDeck();
+        return backDeck();
     }
 }

@@ -1,7 +1,6 @@
 package org.openjfx.layout;
 
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
@@ -36,31 +35,16 @@ public class Grids {
         getGrid(grid).setAlignment(pos);
     }
 
-    public void setTo(String grid, int index, Node node) {
-        try { getGrid(grid).getChildren().set(index, node); }
-        catch (Exception e) { throw new RuntimeException("Collection grid not found!"); }
+    public void setTo(String grid, Node node) {
+        try { getGrid(grid).getChildren().set(0, node); }
+        catch (Exception e) { throw new RuntimeException(e.getMessage()); }
     }
 
     public void addTo(String grid, Node node) {
-        try { getGrid(grid).add(node, getGrid(grid).getColumnCount() + 1, 0); }
-        catch (Exception e) { throw new RuntimeException("Collection grid not found!"); }
-    }
-
-    public void addToChildren(String grid, Node node) {
         try {
-            Group group = (Group) getGrid(grid).getChildren().get(0);
-            group.getChildren().add(node);
-        } catch (Exception e) { throw new RuntimeException("Collection grid not found!"); }
-    }
-
-    public void setToChildren(String grid, int index, Node node) {
-        try {
-            Group group = (Group) getGrid(grid).getChildren().get(0);
-            group.getChildren().set(index, node);
-        } catch (Exception e) { throw new RuntimeException("Collection grid not found!"); }
-    }
-
-    public Group getChild(String grid) {
-        return (Group) getGrid(grid).getChildren().get(0);
+            getGrid(grid).add(node, getGrid(grid).getColumnCount() + 1, 0);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

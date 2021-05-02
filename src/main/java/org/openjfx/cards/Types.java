@@ -7,41 +7,44 @@ import org.openjfx.game.History;
 import org.openjfx.utils.Images;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.openjfx.utils.Roles.roles;
 import static org.openjfx.utils.Comparator.isTypeCardValid;
+import static org.openjfx.game.Attempts.isAlive;
 
 public class Types {
     private final List<Deck> memory = new ArrayList<>();
+    private static boolean isAWin;
 
     public Types() { }
 
-    public List<Deck> getMemory() {
+    public List<Deck> getDeckList() {
         return memory;
     }
 
     public ImageView getCardsFace(String type) {
-        Deck deck = getMemory().get(roles.indexOf(type));
-        if(deck.getMemory().size() == 0) return Images.createCardImage(
+        Deck deck = getDeckList().get(roles.indexOf(type));
+        if(deck.getStackSize() == 0) return Images.createCardImage(
             "faces",
             roles.indexOf(type) + 3,
             CardSize.SMALL.size
         );
 
-        Card card = deck.getMemory().peek();
+        Card card = deck.peekCard();
         return Images.createCardImage(card.getType(), card.getNumber(), CardSize.SMALL.size);
     }
 
     public void moveToTypes(History history, Deck deck) {
-        if(history.getCard() != null) {
-            Card historyCard = history.getDeck().getLastCard();
-            Card card = deck.getMemory().size() > 0 ? deck.getLastCard() : null;
+        if(history.isNotCardNull()) {
+            Card historyCard = history.peekCardFromDeck();
+            Card card = deck.getStackSize() > 0 ? deck.peekCard() : null;
 
-            if(card == null && historyCard.getNumber().equals(1)
+            if(card == null && historyCard.isAce()
                 || card != null && isTypeCardValid(historyCard, card)) {
-                deck.addCard(history.getDeck().getItem());
+                deck.addCard(history.popCardFromDeck());
 
-                try { history.getDeck().getLastCard().setOpenTrue(); }
+                try { history.peekCardFromDeck().setOpenTrue(); }
                 catch (Exception ignored) {}
 
                 history.sendSignalToGame();
@@ -60,15 +63,34 @@ public class Types {
 
             view.setX(100 * (roleIndex * 1.75));
             view.setOnMouseClicked(event -> {
-                if(history.getDeck().getLastCard().getType().equals(roles.get(finalRoleIndex)))
-                    moveToTypes(history, getMemory().get(finalRoleIndex));
+                if(isAlive() && !isAWin()) {
+                    if(history.isNotCardNull()
+                        && history.peekCardFromDeck().getType().equals(roles.get(finalRoleIndex)))
+                        moveToTypes(history, getDeckList().get(finalRoleIndex));
 
-                else history.cleanCard();
+                    else history.cleanCard();
+                }
             });
 
             group.getChildren().add(view);
         }
 
         return group;
+    }
+
+    public void verifyAllTypes() {
+        List<Deck> decks = getDeckList().stream()
+            .filter(deck -> deck.getStackSize() == 13)
+            .collect(Collectors.toList());
+
+        setIsAWin(decks.size() == 4);
+    }
+
+    public static boolean isAWin() {
+        return isAWin;
+    }
+
+    public static void setIsAWin(boolean isAWin) {
+        Types.isAWin = isAWin;
     }
 }

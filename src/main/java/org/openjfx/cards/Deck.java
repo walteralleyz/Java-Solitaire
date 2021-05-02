@@ -1,9 +1,6 @@
 package org.openjfx.cards;
 
-import javafx.scene.image.ImageView;
-import org.openjfx.enums.CardSize;
 import org.openjfx.game.History;
-import org.openjfx.utils.Images;
 
 import java.util.*;
 
@@ -25,14 +22,23 @@ public class Deck {
     }
 
     public boolean moveToDeck(History history) {
-        if(history.getCard() != null) {
-            Card historyCard = history.getDeck().getLastCard();
-            Card card = getMemory().size() > 0 ? getLastCard() : null;
+        if(history.isNotCardNull()) {
+            Card previous = history.getCard();
+            Card selected = getStackSize() > 0 ? peekCard() : null;
 
-            if(card == null || isCardValid(historyCard, card)) {
-                addCard(history.getDeck().getItem());
+            if(selected == null || isCardValid(previous, selected)) {
+                Stack<Card> temp = new Stack<>();
+                Card card;
 
-                try { history.getDeck().getLastCard().setOpenTrue(); }
+                do {
+                    card = history.popCardFromDeck();
+                    card.setOpenTrue();
+                    temp.push(card);
+                } while(card != previous);
+
+                while(!temp.isEmpty()) { addCard(temp.pop()); }
+
+                try { history.peekCardFromDeck().setOpenTrue(); }
                 catch (Exception ignored) {}
 
                 history.cleanCard();
@@ -45,17 +51,21 @@ public class Deck {
         return false;
     }
 
-    public Stack<Card> getMemory() {
+    public Stack<Card> getCardStack() {
         return memory;
+    }
+
+    public int getStackSize() {
+        return getCardStack().size();
     }
 
     public void shuffleDeck() { Collections.shuffle(memory); }
 
-    public Card getItem() {
+    public Card popCard() {
         return memory.pop();
     }
 
-    public Card getLastCard() {
+    public Card peekCard() {
         return memory.peek();
     }
 

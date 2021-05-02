@@ -8,8 +8,6 @@ import org.openjfx.game.History;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.openjfx.cards.Card.showCardBack;
-
 public class Stacks {
     private final List<Deck> memory = new ArrayList<>();
 
@@ -19,27 +17,30 @@ public class Stacks {
         return memory.size();
     }
 
-    public List<Deck> getMemory() {
+    public List<Deck> getDeckList() {
         return memory;
     }
 
     public Group createDecks(History history) {
         Group group = new Group();
 
-        for(int stackIndex = 0; stackIndex < getMemory().size(); stackIndex++) {
+        for(int stackIndex = 0; stackIndex < getSize(); stackIndex++) {
             Group temp = new Group();
-            Deck deck = getMemory().get(stackIndex);
-            int size = deck.getMemory().size();
+            Deck deck = getDeckList().get(stackIndex);
+            int stackSize = deck.getStackSize();
 
-            if(size == 0) temp.getChildren().add(new Card("faces", 2).showDeckEmptyAndSetHandler(history, deck));
+            if(stackSize == 0) temp.getChildren().add(
+                new Card("faces", 2)
+                    .showDeckEmptyAndSetHandler(history, deck)
+            );
 
-            for(int deckIndex = 0; deckIndex < size; deckIndex++) {
-                Card card = deck.getMemory().get(deckIndex);
-                ImageView image = showCardBack();
+            for(int deckIndex = 0; deckIndex < stackSize; deckIndex++) {
+                Card card = deck.getCardStack().get(deckIndex);
+                ImageView image = Card.getCardBack();
 
                 if(card.isOpen()) image = card.showDeckCardAndSetHandler(history, deck);
 
-                image.setY(deckIndex * 15);
+                image.setY(deckIndex * 25);
                 temp.getChildren().add(image);
             }
 

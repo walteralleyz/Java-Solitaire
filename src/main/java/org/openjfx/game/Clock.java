@@ -12,9 +12,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import org.openjfx.enums.ColumnWidth;
 
-import static javafx.scene.text.FontPosture.REGULAR;
-import static javafx.scene.text.FontWeight.BOLD;
 import static org.openjfx.utils.Pad.padLeftZeros;
+import static org.openjfx.utils.Path.loadFont;
 
 public class Clock {
     public static Text text = new Text();
@@ -22,10 +21,11 @@ public class Clock {
     private Timeline clock;
 
     public Group setup() {
-        text.setFont(Font.font("verdana", BOLD, REGULAR, 24));
+        Font font = loadFont();
+
+        text.setFont(font);
         text.setFill(Color.WHITE);
         text.setWrappingWidth(ColumnWidth.MIDDLE.width);
-        text.setTextAlignment(TextAlignment.RIGHT);
 
         return new Group(text);
     }
@@ -33,7 +33,7 @@ public class Clock {
     @FXML
     public void initialize() {
         clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            text.setText(String.format("Time: %s", calcTime(seconds)));
+            text.setText(String.format("Time %s", calcTime(seconds)));
             seconds++;
         }),
             new KeyFrame(Duration.seconds(1))
@@ -50,13 +50,13 @@ public class Clock {
         String time;
 
         if(seconds > 59) time = String.format(
-            "%s:%s",
+            "%s %s",
             seconds / 60,
             padLeftZeros(Integer.toString(seconds % 60), 2)
         );
 
         else
-            time = "0:" + padLeftZeros(Integer.toString(seconds), 2);
+            time = "0 " + padLeftZeros(Integer.toString(seconds), 2);
 
         return time;
     }

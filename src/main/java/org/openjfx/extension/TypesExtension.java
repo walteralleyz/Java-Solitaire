@@ -12,7 +12,7 @@ public class TypesExtension {
         for(int roleIndex = 0; roleIndex < roles.size(); roleIndex++) {
             Deck roleDeck = new Deck();
 
-            types.getMemory().add(roleDeck);
+            types.getDeckList().add(roleDeck);
         }
 
         return types;

@@ -3,6 +3,8 @@ package org.openjfx.layout;
 import javafx.scene.layout.GridPane;
 import org.openjfx.enums.ColumnWidth;
 
+import static org.openjfx.game.Attempts.isAlive;
+
 public class Pane extends GridPane {
 
     private Pane() {

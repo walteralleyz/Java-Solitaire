@@ -1,21 +1,24 @@
 package org.openjfx.game;
 
-import javafx.scene.image.ImageView;
+import org.openjfx.cards.Card;
 import org.openjfx.cards.Deck;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class History {
-    private ImageView card;
+    private Card card;
     private Deck deck;
+    private List<Card> cardList;
 
     private final Game game;
 
-    public History(Game game) {
-        this.game = game;
+    public Card getCard() {
+        return card;
     }
 
-    public ImageView getCard() {
-        return card;
+    public History(Game game) {
+        this.game = game;
     }
 
     public Deck getDeck() {
@@ -26,19 +29,54 @@ public class History {
         game.update();
     }
 
-    public void setCard(ImageView card, Deck deck) {
-        if(this.card != null) this.card.setStyle("-fx-opacity: 1");
-
+    public void setCard(Card card, Deck deck) {
         this.deck = deck;
         this.card = card;
-        this.card.setStyle("-fx-opacity: 0.8");
+
+        selectAndFillList();
     }
 
     public void cleanCard() {
         if(card != null) {
-            card.setStyle("-fx-opacity: 1");
+            unSelectedAndClearList();
+
             card = null;
             deck = null;
         }
+    }
+
+    public void selectAndFillList() {
+        cardList = new ArrayList<>();
+        int deckSize = deck.getStackSize()-1;
+
+        do {
+            Card temp = deck.getCardStack().get(deckSize);
+            temp.getView().setStyle("-fx-opacity: 0.9");
+            cardList.add(temp);
+
+            if(temp == card) break;
+
+            deckSize--;
+        } while(true);
+    }
+
+    public void unSelectedAndClearList() {
+        for(Card card : cardList) {
+            card.getView().setStyle("-fx-opacity: 1");
+        }
+
+        cardList = null;
+    }
+
+    public boolean isNotCardNull() {
+        return card != null;
+    }
+
+    public Card popCardFromDeck() {
+        return getDeck().popCard();
+    }
+
+    public Card peekCardFromDeck() {
+        return getDeck().peekCard();
     }
 }

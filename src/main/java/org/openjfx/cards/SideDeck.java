@@ -1,29 +1,35 @@
 package org.openjfx.cards;
 
 import javafx.scene.image.ImageView;
-import org.openjfx.enums.CardSize;
 import org.openjfx.game.History;
-import org.openjfx.utils.Images;
 
 import java.util.Stack;
+
+import static org.openjfx.cards.Types.isAWin;
+import static org.openjfx.game.Attempts.isAlive;
 
 public class SideDeck {
     private final Deck deck = new Deck();
 
     public void addCard(Card card) {
-        deck.getMemory().push(card);
+        deck.getCardStack().push(card);
     }
 
     public ImageView getNextCardFace(History history) {
-        Card card = deck.getMemory().peek();
-        card.setOpenTrue();
-        ImageView view = Images.createCardImage(card.getType(), card.getNumber(), CardSize.SMALL.size);
-        view.setOnMouseClicked(event -> history.setCard(view, deck));
+        try {
+            Card card = deck.peekCard();
+            ImageView view = card.getView();
+            view.setOnMouseClicked(event -> {
+                if(isAlive() && !isAWin()) history.setCard(card, deck);
+            });
 
-        return view;
+            return view;
+        } catch (Exception e) {
+            return new ImageView();
+        }
     }
 
-    public Stack<Card> getMemory() {
-        return deck.getMemory();
+    public Stack<Card> getDeck() {
+        return deck.getCardStack();
     }
 }

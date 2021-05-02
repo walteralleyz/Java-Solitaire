@@ -12,14 +12,14 @@ public class StackExtension {
             Deck temp = new Deck();
 
             for(int j = 0; j <= i; j++) {
-                Card card = deck.getItem();
+                Card card = deck.popCard();
 
                 if(j == i) card.setOpenTrue();
 
                 temp.addCard(card);
             }
 
-            stacks.getMemory().add(temp);
+            stacks.getDeckList().add(temp);
         }
 
         return stacks;
