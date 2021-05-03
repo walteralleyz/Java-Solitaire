@@ -4,8 +4,8 @@
 ### Installation
 1. `requirements:` At least Java 11 installed.
 3. `setup:`
-2.1. **Intellij** -> Open the file in the IDE and execute \*MainApp\* file.
-2.2. **Terminal** -> Inside of project folder, type `./gradlew run`.
+\n2.1. **Intellij** -> Open the file in the IDE and execute \*MainApp\* file.
+\n2.2. **Terminal** -> Inside of project folder, type `./gradlew run`.
 
 ### Game Rules
 <pre>
