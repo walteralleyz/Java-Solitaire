@@ -3,14 +3,13 @@ package org.openjfx;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.openjfx.game.Game;
-import org.openjfx.layout.Pane;
+import org.openjfx.layouts.MenuPane;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        final Pane pane = new Game().setup();
+        MenuPane pane = new MenuPane().setup(stage);
         Scene scene = new Scene(pane);
 
         stage.setTitle("Java Solitaire");

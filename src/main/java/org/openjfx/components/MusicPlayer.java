@@ -1,11 +1,10 @@
-package org.openjfx.game;
+package org.openjfx.components;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import org.openjfx.enums.Dir;
 
 import java.io.File;
 
@@ -27,12 +26,12 @@ public class MusicPlayer {
         speaker.setOnMouseClicked(event -> {
             if(isPlaying) {
                 isPlaying = false;
-                player.setVolume(0.0);
+                player.pause();
                 speaker.setStyle("-fx-opacity: 0.3;");
             }
             else {
                 isPlaying = true;
-                player.setVolume(1);
+                player.play();
                 speaker.setStyle("-fx-opacity: 1");
             }
         });
@@ -44,5 +43,9 @@ public class MusicPlayer {
         });
 
         return speaker;
+    }
+
+    public void stop() {
+        player.stop();
     }
 }

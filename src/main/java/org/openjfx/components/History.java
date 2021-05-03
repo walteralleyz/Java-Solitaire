@@ -1,7 +1,7 @@
-package org.openjfx.game;
+package org.openjfx.components;
 
 import org.openjfx.cards.Card;
-import org.openjfx.cards.Deck;
+import org.openjfx.decks.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +12,15 @@ public class History {
     private List<Card> cardList;
 
     private final Game game;
+    private final Moves moves;
 
     public Card getCard() {
         return card;
     }
 
-    public History(Game game) {
+    public History(Game game, Moves moves) {
         this.game = game;
+        this.moves = moves;
     }
 
     public Deck getDeck() {
@@ -28,6 +30,8 @@ public class History {
     public void sendSignalToGame() {
         game.update();
     }
+
+    public void incrementMoveCounter() { moves.incrementMoves(); }
 
     public void setCard(Card card, Deck deck) {
         this.deck = deck;

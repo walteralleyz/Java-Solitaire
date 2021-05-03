@@ -1,4 +1,4 @@
-package org.openjfx.game;
+package org.openjfx.components;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -8,7 +8,6 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import org.openjfx.enums.ColumnWidth;
 
@@ -21,7 +20,7 @@ public class Clock {
     private Timeline clock;
 
     public Group setup() {
-        Font font = loadFont();
+        Font font = loadFont(40);
 
         text.setFont(font);
         text.setFill(Color.WHITE);

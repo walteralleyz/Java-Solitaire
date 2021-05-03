@@ -15,13 +15,13 @@ public class Path {
         return String.format("%s/%s/%s/%s", ROOT.dir, ASSETS.dir, dir, file);
     }
 
-    public static Font loadFont() {
+    public static Font loadFont(int customSize) {
         File file = new File(getFilePath(FONTS.dir, "8bitin.ttf"));
         Font font;
 
         try {
             InputStream in = new FileInputStream(file);
-            font = Font.loadFont(in, 40);
+            font = Font.loadFont(in, customSize);
         } catch (Exception e) { font = Font.font("verdana", BOLD, REGULAR, 24); }
 
         return font;

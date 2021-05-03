@@ -16,8 +16,16 @@ public class Comparator {
             return previous.equals("tiles") || previous.equals("clovers");
     }
 
-    public static boolean isTypeCardValid(Card previous, Card selected) {
-        return previous.getType().equals(selected.getType())
-            && (previous.getNumber() - 1) == selected.getNumber();
+    public static boolean isTypeCardValid(Card previous, String type) {
+        return previous.getType().equals(type);
+    }
+
+    public static boolean isPreviousNumberGreater(Card previous, Card selected) {
+        if(selected != null) return (previous.getNumber() - 1) == selected.getNumber();
+        return false;
+    }
+
+    public static boolean isAceAndSameType(Card previous, String type) {
+        return previous.isAce() && previous.getType().equals(type);
     }
 }

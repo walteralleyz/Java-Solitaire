@@ -11,7 +11,7 @@ import static org.openjfx.enums.Dir.*;
 
 public class Images {
     public static ImageView createCardImage(String type, int number, double scale) {
-        String url = String.format("%s/%s/%s/%d.png", ROOT.dir, ASSETS.dir, type, number);
+        String url = String.format("%s/%s/cards/%s/%d.png", ROOT.dir, ASSETS.dir, type, number);
 
         try {
             FileInputStream inputStream = new FileInputStream(url);

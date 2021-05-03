@@ -1,4 +1,4 @@
-package org.openjfx.layout;
+package org.openjfx.layouts;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;

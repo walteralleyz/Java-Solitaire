@@ -1,15 +1,15 @@
 package org.openjfx.cards;
 
 import javafx.scene.image.ImageView;
+import org.openjfx.decks.StackDeck;
 import org.openjfx.enums.CardNumber;
 import org.openjfx.enums.CardSize;
-import org.openjfx.game.History;
-import org.openjfx.utils.Images;
+import org.openjfx.components.History;
 
 import java.util.Objects;
 
-import static org.openjfx.cards.Types.isAWin;
-import static org.openjfx.game.Attempts.isAlive;
+import static org.openjfx.containers.Types.isAWin;
+import static org.openjfx.components.Attempts.isAlive;
 import static org.openjfx.utils.Images.createCardImage;
 
 public class Card {
@@ -22,27 +22,7 @@ public class Card {
         this.type = type;
         this.number = number;
         this.isOpen = false;
-        this.view = Images.createCardImage(this.getType(), this.getNumber(), CardSize.SMALL.size);
-    }
-
-    public ImageView showDeckCardAndSetHandler(History history, Deck deck) {
-        view.setOnMouseClicked(event -> {
-            if(isAlive() && !isAWin()) {
-                if(deck.moveToDeck(history)) return;
-                history.cleanCard();
-                history.setCard(this, deck);
-            }
-        });
-
-        return view;
-    }
-
-    public ImageView showDeckEmptyAndSetHandler(History history, Deck deck) {
-        view.setOnMouseClicked(event -> {
-            if(isAlive() && !isAWin()) deck.moveToDeck(history);
-        });
-
-        return view;
+        this.view = createCardImage(this.getType(), this.getNumber(), CardSize.SMALL.size);
     }
 
     public ImageView getView() {
@@ -67,6 +47,26 @@ public class Card {
 
     public void setOpenTrue() {
         isOpen = true;
+    }
+
+    public ImageView showDeckCardAndSetHandler(History history, StackDeck deck) {
+        view.setOnMouseClicked(event -> {
+            if(isAlive() && !isAWin()) {
+                if(deck.moveToDeck(history)) return;
+                history.cleanCard();
+                history.setCard(this, deck);
+            }
+        });
+
+        return view;
+    }
+
+    public ImageView showDeckEmptyAndSetHandler(History history, StackDeck deck) {
+        view.setOnMouseClicked(event -> {
+            if(isAlive() && !isAWin()) deck.moveToDeck(history);
+        });
+
+        return view;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Card {
         return createCardImage("faces", 1, CardSize.SMALL.size);
     }
 
-    public static ImageView getCardReset() {
+    public static ImageView getCardBlank() {
         return createCardImage("faces", 2, CardSize.SMALL.size);
     }
 }

@@ -1,15 +1,16 @@
 package org.openjfx.extension;
 
 import org.openjfx.cards.Card;
-import org.openjfx.cards.Deck;
-import org.openjfx.cards.Stacks;
+import org.openjfx.decks.Deck;
+import org.openjfx.decks.StackDeck;
+import org.openjfx.containers.Stacks;
 
 public class StackExtension {
     public static Stacks populateStacks(Deck deck) {
         Stacks stacks = new Stacks();
 
         for(int i = 0; i < 7; i++) {
-            Deck temp = new Deck();
+            StackDeck temp = new StackDeck();
 
             for(int j = 0; j <= i; j++) {
                 Card card = deck.popCard();
