@@ -10,9 +10,27 @@ repositories {
 dependencies {
 }
 
-javafx {
-    version = "16"
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.media' ]
+java {
+    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
-mainClassName = 'org.openjfx.MainApp'
+jar {
+    doFirst {
+        manifest {
+            if (!configurations.runtimeClasspath.isEmpty()) {
+                attributes(
+                        'Class-Path': configurations.runtimeClasspath.files.collect { it.toURI().toString() }.join(' '),
+                        'Main-Class': 'org.openjfx.Main')
+            }
+
+        }
+    }
+}
+
+javafx {
+    version = "16"
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
+}
+
+mainClassName = 'org.openjfx.Main'
