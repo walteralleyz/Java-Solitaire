@@ -2,12 +2,14 @@ package org.openjfx.decks;
 
 import org.openjfx.cards.Card;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Stack;
 
 public class Deck {
     private final Stack<Card> memory = new Stack<>();
 
-    public Deck() { }
+    public Deck() {
+    }
 
     public Stack<Card> getCardStack() {
         return memory;
@@ -17,7 +19,9 @@ public class Deck {
         return getCardStack().size();
     }
 
-    public void shuffleDeck() { Collections.shuffle(memory); }
+    public void shuffleDeck() {
+        Collections.shuffle(memory);
+    }
 
     public Card popCard() {
         return memory.pop();
@@ -27,7 +31,9 @@ public class Deck {
         return memory.peek();
     }
 
-    public boolean isDeckEmpty() { return memory.isEmpty(); }
+    public boolean isDeckEmpty() {
+        return memory.isEmpty();
+    }
 
     public void addCard(Card card) {
         memory.push(card);

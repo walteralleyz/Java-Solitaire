@@ -10,9 +10,8 @@ repositories {
 dependencies {
 }
 
-java {
-    targetCompatibility = JavaVersion.VERSION_11
-    sourceCompatibility = JavaVersion.VERSION_11
+compileJava {
+    options.release.set(11)
 }
 
 jar {
@@ -34,3 +33,4 @@ javafx {
 }
 
 mainClassName = 'org.openjfx.Main'
+apply plugin: "org.openjfx.javafxplugin"

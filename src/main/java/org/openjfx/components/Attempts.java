@@ -6,25 +6,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.openjfx.enums.ColumnWidth;
-import org.openjfx.enums.Dir;
+import org.openjfx.utils.PathUtil;
 
-import java.io.File;
-
-import static org.openjfx.utils.Path.getFilePath;
-import static org.openjfx.utils.Path.loadFont;
+import static org.openjfx.enums.Dir.SOUNDS;
+import static org.openjfx.utils.PathUtil.loadFont;
 
 public class Attempts {
     private static Attempts instance;
     private int life = 5;
 
-    private Attempts() {}
+    private Attempts() {
+    }
 
     public static void tookDamage() {
-        if(instance.life > 0) --instance.life;
+        if (instance.life > 0) --instance.life;
     }
 
     public static Text attemptText() {
-        if(instance == null) instance = new Attempts();
+        if (instance == null) instance = new Attempts();
 
         Font font = loadFont(40);
         Text text = new Text("try " + instance.life);
@@ -47,12 +46,12 @@ public class Attempts {
         text.setFont(font);
         text.setFill(Color.WHITE);
         text.setWrappingWidth(ColumnWidth.MIDDLE.width);
-
         return text;
     }
 
     public static Text winnerText(Color color) {
-        Media effect = new Media(new File(getFilePath(Dir.SOUNDS.dir, "win.mp3")).toURI().toString());
+        final String url = PathUtil.getFilePath(SOUNDS.dir, "win.mp3");
+        Media effect = new Media(url);
         MediaPlayer player = new MediaPlayer(effect);
         Font font = loadFont(74);
         Text text = new Text("You Win");

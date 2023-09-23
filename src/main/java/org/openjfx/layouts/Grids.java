@@ -8,23 +8,22 @@ import java.util.Map;
 
 public class Grids {
     private final GridPane
-        deck     = new GridPane(),
-        sideDeck = new GridPane(),
-        type     = new GridPane(),
-        stack    = new GridPane(),
-        attempt  = new GridPane(),
-        clock    = new GridPane(),
-        music    = new GridPane()
-    ;
+            deck = new GridPane(),
+            sideDeck = new GridPane(),
+            type = new GridPane(),
+            stack = new GridPane(),
+            attempt = new GridPane(),
+            clock = new GridPane(),
+            music = new GridPane();
 
     private final Map<String, GridPane> gridMap = Map.of(
-        "deck", deck,
-        "sideDeck", sideDeck,
-        "type", type,
-        "stack", stack,
-        "attempt", attempt,
-        "clock", clock,
-        "music", music
+            "deck", deck,
+            "sideDeck", sideDeck,
+            "type", type,
+            "stack", stack,
+            "attempt", attempt,
+            "clock", clock,
+            "music", music
     );
 
     public GridPane getGrid(String grid) {
@@ -36,8 +35,11 @@ public class Grids {
     }
 
     public void setTo(String grid, Node node) {
-        try { getGrid(grid).getChildren().set(0, node); }
-        catch (Exception e) { throw new RuntimeException(e.getMessage()); }
+        try {
+            getGrid(grid).getChildren().set(0, node);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public void addTo(String grid, Node node) {

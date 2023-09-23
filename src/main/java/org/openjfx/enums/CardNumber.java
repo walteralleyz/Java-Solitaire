@@ -6,7 +6,7 @@ public enum CardNumber {
     QUEEN(12),
     KING(13);
 
-    public int number;
+    public final int number;
 
     CardNumber(int number) {
         this.number = number;

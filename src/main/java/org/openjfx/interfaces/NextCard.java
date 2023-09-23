@@ -4,5 +4,5 @@ import org.openjfx.decks.SideDeck;
 
 @FunctionalInterface
 public interface NextCard {
-    public void flip(SideDeck deck);
+    void flip(SideDeck deck);
 }

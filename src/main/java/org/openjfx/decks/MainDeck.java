@@ -16,8 +16,8 @@ public class MainDeck extends Deck {
     }
 
     public void copyFromSideDeck(SideDeck sideDeck) {
-        if(getCardStack().isEmpty()) {
-            while(!sideDeck.getCardStack().isEmpty()) {
+        if (getCardStack().isEmpty()) {
+            while (!sideDeck.getCardStack().isEmpty()) {
                 getCardStack().push(sideDeck.getCardStack().pop());
             }
 

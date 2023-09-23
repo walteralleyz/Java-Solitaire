@@ -5,7 +5,7 @@ public enum ColumnWidth {
     MIDDLE(200d),
     BOTH(1024d);
 
-    public double width;
+    public final double width;
 
     ColumnWidth(double width) {
         this.width = width;

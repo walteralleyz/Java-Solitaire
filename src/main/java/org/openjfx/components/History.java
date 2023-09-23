@@ -31,7 +31,9 @@ public class History {
         game.update();
     }
 
-    public void incrementMoveCounter() { moves.incrementMoves(); }
+    public void incrementMoveCounter() {
+        moves.incrementMoves();
+    }
 
     public void setCard(Card card, Deck deck) {
         this.deck = deck;
@@ -41,7 +43,7 @@ public class History {
     }
 
     public void cleanCard() {
-        if(card != null) {
+        if (card != null) {
             unSelectedAndClearList();
 
             card = null;
@@ -51,21 +53,21 @@ public class History {
 
     public void selectAndFillList() {
         cardList = new ArrayList<>();
-        int deckSize = deck.getStackSize()-1;
+        int deckSize = deck.getStackSize() - 1;
 
         do {
             Card temp = deck.getCardStack().get(deckSize);
             temp.getView().setStyle("-fx-opacity: 0.9");
             cardList.add(temp);
 
-            if(temp == card) break;
+            if (temp == card) break;
 
             deckSize--;
-        } while(true);
+        } while (true);
     }
 
     public void unSelectedAndClearList() {
-        for(Card card : cardList) {
+        for (Card card : cardList) {
             card.getView().setStyle("-fx-opacity: 1");
         }
 

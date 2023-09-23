@@ -5,11 +5,11 @@ import org.openjfx.cards.Card;
 public class Comparator {
     public static boolean isCardValid(Card previous, Card selected) {
         return (previous.getNumber() + 1) == selected.getNumber()
-            && deckTypeComparator(previous.getType(), selected.getType());
+                && deckTypeComparator(previous.getType(), selected.getType());
     }
 
     public static boolean deckTypeComparator(String previous, String selected) {
-        if(selected.equals("tiles") || selected.equals("clovers"))
+        if (selected.equals("tiles") || selected.equals("clovers"))
             return previous.equals("pikes") || previous.equals("hearts");
 
         else
@@ -21,7 +21,7 @@ public class Comparator {
     }
 
     public static boolean isPreviousNumberGreater(Card previous, Card selected) {
-        if(selected != null) return (previous.getNumber() - 1) == selected.getNumber();
+        if (selected != null) return (previous.getNumber() - 1) == selected.getNumber();
         return false;
     }
 

@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-import static org.openjfx.utils.Path.loadFont;
+import static org.openjfx.utils.PathUtil.loadFont;
 
 public class Moves {
     private int moves = 0;

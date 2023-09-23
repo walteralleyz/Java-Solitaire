@@ -9,10 +9,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.openjfx.layouts.Pane;
 
-import java.io.File;
-
-import static org.openjfx.utils.Path.getFilePath;
-import static org.openjfx.enums.Dir.*;
+import static org.openjfx.enums.Dir.ICONS;
+import static org.openjfx.enums.Dir.SOUNDS;
+import static org.openjfx.utils.PathUtil.getFilePath;
 
 public class StartButton {
     private final Stage stage;
@@ -22,9 +21,9 @@ public class StartButton {
     }
 
     public ImageView setup() {
-        Media effect = new Media(new File(getFilePath(SOUNDS.dir, "start_button_effect.mp3")).toURI().toString());
+        Media effect = new Media(getFilePath(SOUNDS.dir, "start_button_effect.mp3"));
         MediaPlayer player = new MediaPlayer(effect);
-        Image image = new Image(new File(getFilePath(ICONS.dir, "start_button.png")).toURI().toString());
+        Image image = new Image(getFilePath(ICONS.dir, "start_button.png"));
         ImageView button = new ImageView(image);
 
         button.setOnMouseClicked(event -> {

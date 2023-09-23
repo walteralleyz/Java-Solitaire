@@ -1,13 +1,13 @@
 package org.openjfx.enums;
 
 public enum Dir {
-    ROOT("src"),
+    ROOT("./"),
     ASSETS("assets"),
     SOUNDS("sounds"),
     ICONS("icons"),
     FONTS("fonts");
 
-    public String dir;
+    public final String dir;
 
     Dir(String dir) {
         this.dir = dir;
