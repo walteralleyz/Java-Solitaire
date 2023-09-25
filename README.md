@@ -33,7 +33,7 @@ uninstall it whenever they want. Well, you can easily achieve that with `jpackag
 #### Linux
 
 - For Red Hat Linux, the `rpm-build` package is required.
-- For Ubuntu Linux, the `fakeroot` package is required.
+- For Ubuntu, the `fakeroot` package is required.
 
 ### How to Build Native installer
 
