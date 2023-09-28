@@ -1,5 +1,7 @@
 import org.panteleyev.jpackage.ImageType
 
+import java.time.Instant
+
 plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.1.0'
@@ -25,6 +27,7 @@ jar {
             if (!configurations.runtimeClasspath.isEmpty()) {
                 attributes(
                         'Class-Path': configurations.runtimeClasspath.files.collect { it.toURI().toString() }.join(' '),
+                        'Build-Timestamp': Instant.now().toString(),
                         'Main-Class': 'org.openjfx.Main')
             }
 

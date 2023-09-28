@@ -19,7 +19,8 @@ A game of classic Solitaire (aka _Klondike_) made with JavaFX
 
 Wouldn't it be awesome if you could just share the game's native OS installer to your users, without having them worry
 about setting up Java? The game will be installed natively on their machine, with a shortcut & icon, and they can
-uninstall it whenever they want. Well, you can easily achieve that with `jpackage` tool, included in the JDK, **since Java
+uninstall it whenever they want. Well, you can _easily_ achieve that with `jpackage` tool, included in the JDK, **since
+Java
 15**! But it would also require for YOUR Dev machine to have a few extra requirements:
 
 #### Windows
@@ -35,7 +36,7 @@ uninstall it whenever they want. Well, you can easily achieve that with `jpackag
 - For Red Hat Linux, the `rpm-build` package is required.
 - For Ubuntu, the `fakeroot` package is required.
 
-### How to Build Native installer
+### How to Build Native installer (1 command ONLY)
 
 Simply run this command below in your terminal/CMD, inside this project root directory, and wait for it to complete.
 If successful, you will find the installer for your OS inside `./build/native/`. Building for other OS requires that
