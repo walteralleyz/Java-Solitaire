@@ -14,15 +14,17 @@ public class StackDeck extends Deck {
     }
 
     public boolean moveToDeck(History history) {
-        if(history.isNotCardNull()) {
+        if (history.isNotCardNull()) {
             Card previous = history.getCard();
             Card selected = getStackSize() > 0 ? peekCard() : null;
 
-            if(selected == null || isCardValid(previous, selected)) {
+            if (selected == null || isCardValid(previous, selected)) {
                 selectUnderCardSelected(history);
 
-                try { history.peekCardFromDeck().setOpenTrue(); }
-                catch (Exception ignored) {}
+                try {
+                    history.peekCardFromDeck().setOpenTrue();
+                } catch (Exception ignored) {
+                }
 
                 history.cleanCard();
                 history.sendSignalToGame();
@@ -43,8 +45,10 @@ public class StackDeck extends Deck {
             card = history.popCardFromDeck();
             card.setOpenTrue();
             temp.push(card);
-        } while(card != history.getCard());
+        } while (card != history.getCard());
 
-        while(!temp.isEmpty()) { addCard(temp.pop()); }
+        while (!temp.isEmpty()) {
+            addCard(temp.pop());
+        }
     }
 }

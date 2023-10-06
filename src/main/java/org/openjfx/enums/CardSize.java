@@ -5,7 +5,7 @@ public enum CardSize {
     MEDIUM(2.0),
     BIG(2.5);
 
-    public double size;
+    public final double size;
 
     CardSize(double size) {
         this.size = size;

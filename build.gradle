@@ -1,7 +1,14 @@
+import org.panteleyev.jpackage.ImageType
+
+import java.time.Instant
+
 plugins {
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id "org.panteleyev.jpackageplugin" version "1.5.2"
 }
+
+version = "1.1"
 
 repositories {
     mavenCentral()
@@ -10,9 +17,54 @@ repositories {
 dependencies {
 }
 
-javafx {
-    version = "16"
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.media' ]
+compileJava {
+    options.release.set(11)
 }
 
-mainClassName = 'org.openjfx.MainApp'
+jar {
+    doFirst {
+        manifest {
+            if (!configurations.runtimeClasspath.isEmpty()) {
+                attributes(
+                        'Class-Path': configurations.runtimeClasspath.files.collect { it.toURI().toString() }.join(' '),
+                        'Build-Timestamp': Instant.now().toString(),
+                        'Main-Class': 'org.openjfx.Main')
+            }
+
+        }
+    }
+}
+
+javafx {
+    version = "16"
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
+}
+
+jpackage {
+    appName = "solitaire-fx"
+    winMenu = true
+    winDirChooser = true
+    winShortcutPrompt = true
+    appVersion = "1.1"
+    copyright = "(c) 2021 WalterAlleyz"
+    aboutUrl = "https://github.com/walteralleyz/Java-Solitaire"
+    input = "build/libs/"
+    mainJar = "solitaire-fx-1.1.jar"
+    resourceDir = "build/resources/"
+    mainClass = "org.openjfx.Main"
+    vendor = "WalterAlleyz"
+    destination = "./build/native"
+
+    mac {
+        // Requires Mac OS, and XCode installed
+        icon = "icons/mac-icon.icns"
+    }
+
+    windows {
+        // Requires Wix Toolset installed
+        icon = "icons/win-icon.ico"
+        type = ImageType.MSI
+    }
+}
+
+mainClassName = 'org.openjfx.Main'

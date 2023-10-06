@@ -6,14 +6,16 @@ import org.openjfx.components.History;
 import org.openjfx.decks.Deck;
 import org.openjfx.decks.TypeDeck;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Types {
     private final List<TypeDeck> memory = new ArrayList<>();
     private static boolean isAWin;
 
-    public Types() { }
+    public Types() {
+    }
 
     public List<TypeDeck> getDeckList() {
         return memory;
@@ -23,7 +25,7 @@ public class Types {
         Group group = new Group();
         int distanceX = 0;
 
-        for(TypeDeck typeDeck : getDeckList()) {
+        for (TypeDeck typeDeck : getDeckList()) {
             ImageView view = typeDeck.getTypeCardFace(history);
 
             view.setX(100 * (distanceX * 1.75));
@@ -37,8 +39,8 @@ public class Types {
 
     public void verifyAllTypes() {
         List<Deck> decks = getDeckList().stream()
-            .filter(deck -> deck.getStackSize() == 13)
-            .collect(Collectors.toList());
+                .filter(deck -> deck.getStackSize() == 13)
+                .collect(Collectors.toList());
 
         setIsAWin(decks.size() == 4);
     }

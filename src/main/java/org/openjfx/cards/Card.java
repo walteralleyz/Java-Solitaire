@@ -1,15 +1,15 @@
 package org.openjfx.cards;
 
 import javafx.scene.image.ImageView;
+import org.openjfx.components.History;
 import org.openjfx.decks.StackDeck;
 import org.openjfx.enums.CardNumber;
 import org.openjfx.enums.CardSize;
-import org.openjfx.components.History;
 
 import java.util.Objects;
 
-import static org.openjfx.containers.Types.isAWin;
 import static org.openjfx.components.Attempts.isAlive;
+import static org.openjfx.containers.Types.isAWin;
 import static org.openjfx.utils.Images.createCardImage;
 
 public class Card {
@@ -51,8 +51,8 @@ public class Card {
 
     public ImageView showDeckCardAndSetHandler(History history, StackDeck deck) {
         view.setOnMouseClicked(event -> {
-            if(isAlive() && !isAWin()) {
-                if(deck.moveToDeck(history)) return;
+            if (isAlive() && !isAWin()) {
+                if (deck.moveToDeck(history)) return;
                 history.cleanCard();
                 history.setCard(this, deck);
             }
@@ -63,7 +63,7 @@ public class Card {
 
     public ImageView showDeckEmptyAndSetHandler(History history, StackDeck deck) {
         view.setOnMouseClicked(event -> {
-            if(isAlive() && !isAWin()) deck.moveToDeck(history);
+            if (isAlive() && !isAWin()) deck.moveToDeck(history);
         });
 
         return view;
@@ -85,10 +85,10 @@ public class Card {
     @Override
     public String toString() {
         return "Card{" +
-            "type='" + type + '\'' +
-            ", number=" + number +
-            ", isOpen=" + isOpen +
-            '}';
+                "type='" + type + '\'' +
+                ", number=" + number +
+                ", isOpen=" + isOpen +
+                '}';
     }
 
     public static ImageView getCardBack() {

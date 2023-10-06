@@ -10,8 +10,8 @@ public class DeckExtension {
     public static MainDeck populateDeck() {
         MainDeck temp = new MainDeck();
 
-        for(String role : roles) {
-            for(int card = CardNumber.ACE.number; card <= CardNumber.KING.number ; card++) {
+        for (String role : roles) {
+            for (int card = CardNumber.ACE.number; card <= CardNumber.KING.number; card++) {
                 Card pair = new Card(role, card);
 
                 temp.addCard(pair);

@@ -3,7 +3,6 @@ package org.openjfx.components;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import org.openjfx.containers.Stacks;
 import org.openjfx.containers.Types;
 import org.openjfx.decks.MainDeck;
@@ -11,11 +10,11 @@ import org.openjfx.decks.SideDeck;
 import org.openjfx.layouts.Grids;
 import org.openjfx.layouts.Pane;
 
+import static org.openjfx.components.Attempts.*;
 import static org.openjfx.containers.Types.isAWin;
 import static org.openjfx.extension.DeckExtension.populateDeck;
 import static org.openjfx.extension.StackExtension.populateStacks;
 import static org.openjfx.extension.TypesExtension.populateTypes;
-import static org.openjfx.components.Attempts.*;
 
 public class Game {
     private final SideDeck sideDeck = new SideDeck();
@@ -56,14 +55,12 @@ public class Game {
         grids.setTo("type", types.createTypesFace(history));
         grids.setTo("stack", stacks.createDecks(history));
 
-        if(isAlive() && isAWin()) {
+        if (isAlive() && isAWin()) {
             clock.stop();
             player.stop();
             grids.getGrid("stack").setAlignment(Pos.CENTER);
             grids.getGrid("stack").getChildren().set(0, winnerText(Color.WHITE));
-        }
-
-        else if(!isAlive()) {
+        } else if (!isAlive()) {
             grids.setTo("clock", gameOverText());
             clock.stop();
             player.stop();
@@ -71,7 +68,7 @@ public class Game {
     }
 
     public ImageView createDeckFace() {
-        if(mainDeck.isDeckEmpty()) return mainDeck.createResetCardDeck(sideDeck, history);
+        if (mainDeck.isDeckEmpty()) return mainDeck.createResetCardDeck(sideDeck, history);
         return mainDeck.createBackCardDeck(side -> {
             side.addCard(mainDeck.popCard());
             update();

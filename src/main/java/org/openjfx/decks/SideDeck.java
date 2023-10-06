@@ -4,8 +4,8 @@ import javafx.scene.image.ImageView;
 import org.openjfx.cards.Card;
 import org.openjfx.components.History;
 
-import static org.openjfx.containers.Types.isAWin;
 import static org.openjfx.components.Attempts.isAlive;
+import static org.openjfx.containers.Types.isAWin;
 
 public class SideDeck extends Deck {
 
@@ -22,7 +22,7 @@ public class SideDeck extends Deck {
             Card card = peekCard();
             ImageView view = card.getView();
             view.setOnMouseClicked(event -> {
-                if(isAlive() && !isAWin()) {
+                if (isAlive() && !isAWin()) {
                     history.cleanCard();
                     history.setCard(card, this);
                 }

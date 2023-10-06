@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import org.openjfx.enums.ColumnWidth;
 
 import static org.openjfx.utils.Pad.padLeftZeros;
-import static org.openjfx.utils.Path.loadFont;
+import static org.openjfx.utils.PathUtil.loadFont;
 
 public class Clock {
     public static Text text = new Text();
@@ -35,7 +35,7 @@ public class Clock {
             text.setText(String.format("Time %s", calcTime(seconds)));
             seconds++;
         }),
-            new KeyFrame(Duration.seconds(1))
+                new KeyFrame(Duration.seconds(1))
         );
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
@@ -48,14 +48,15 @@ public class Clock {
     public String calcTime(int seconds) {
         String time;
 
-        if(seconds > 59) time = String.format(
-            "%s %s",
-            seconds / 60,
-            padLeftZeros(Integer.toString(seconds % 60), 2)
-        );
-
-        else
+        if (seconds > 59) {
+            time = String.format(
+                    "%s %s",
+                    seconds / 60,
+                    padLeftZeros(Integer.toString(seconds % 60), 2)
+            );
+        } else {
             time = "0 " + padLeftZeros(Integer.toString(seconds), 2);
+        }
 
         return time;
     }
