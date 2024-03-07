@@ -8,6 +8,9 @@ import org.openjfx.layouts.MenuPane;
 
 import static org.openjfx.utils.PathUtil.getFilePath;
 
+/**
+ * This class on JDK with built in JAVA_FX (Java 8, 9)
+ */
 public class MainApp extends Application {
 
     @Override

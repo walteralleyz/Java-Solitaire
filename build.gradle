@@ -8,7 +8,7 @@ plugins {
     id "org.panteleyev.jpackageplugin" version "1.5.2"
 }
 
-version = "1.1"
+version = "1.2"
 
 repositories {
     mavenCentral()
@@ -17,8 +17,14 @@ repositories {
 dependencies {
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 compileJava {
-    options.release.set(11)
+    options.release.set(17)
 }
 
 jar {
@@ -36,7 +42,7 @@ jar {
 }
 
 javafx {
-    version = "16"
+    version = "19"
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 
@@ -45,11 +51,11 @@ jpackage {
     winMenu = true
     winDirChooser = true
     winShortcutPrompt = true
-    appVersion = "1.1"
+    appVersion = "1.2"
     copyright = "(c) 2021 WalterAlleyz"
     aboutUrl = "https://github.com/walteralleyz/Java-Solitaire"
     input = "build/libs/"
-    mainJar = "solitaire-fx-1.1.jar"
+    mainJar = "solitaire-fx-1.2.jar"
     resourceDir = "build/resources/"
     mainClass = "org.openjfx.Main"
     vendor = "WalterAlleyz"
@@ -58,6 +64,7 @@ jpackage {
     mac {
         // Requires Mac OS, and XCode installed
         icon = "icons/mac-icon.icns"
+        type = ImageType.DMG
     }
 
     windows {
