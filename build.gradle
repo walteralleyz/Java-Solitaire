@@ -8,7 +8,7 @@ plugins {
     id "org.panteleyev.jpackageplugin" version "1.5.2"
 }
 
-version = "1.1"
+version = "1.2"
 
 repositories {
     mavenCentral()
@@ -45,11 +45,11 @@ jpackage {
     winMenu = true
     winDirChooser = true
     winShortcutPrompt = true
-    appVersion = "1.1"
+    appVersion = "1.2"
     copyright = "(c) 2021 WalterAlleyz"
     aboutUrl = "https://github.com/walteralleyz/Java-Solitaire"
     input = "build/libs/"
-    mainJar = "solitaire-fx-1.1.jar"
+    mainJar = "solitaire-fx-1.2.jar"
     resourceDir = "build/resources/"
     mainClass = "org.openjfx.Main"
     vendor = "WalterAlleyz"

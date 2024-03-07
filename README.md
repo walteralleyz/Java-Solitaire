@@ -17,7 +17,7 @@ A game of classic Solitaire (aka _Klondike_) made with JavaFX
 
 ## Bonus: Building Native Installer
 
-You can build a native installer, such as `.msi` for Windows, `.dmg` for MacOS, for JavaFX apps. The installer contains a slim JRE, icons and shortcuts setup. You can _easily_ achieve that with `jpackage` tool, included in the JDK, **since JDK 15**! Learn more about [jpackage tool](https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html)
+You can build a native installer, such as `.msi` for Windows, `.dmg` for MacOS, for JavaFX apps. The installer contains a slim JRE, your app, icons and shortcuts setup. You can _easily_ achieve that with `jpackage` tool, included in the JDK, **since JDK 15**! Learn more about [jpackage tool](https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html)
 You'll need a few extra dependecies: 
 
 #### Windows
