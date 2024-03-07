@@ -17,6 +17,12 @@ repositories {
 dependencies {
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 compileJava {
     options.release.set(17)
 }
@@ -36,7 +42,7 @@ jar {
 }
 
 javafx {
-    version = "16"
+    version = "19"
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 

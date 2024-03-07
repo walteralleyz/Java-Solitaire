@@ -9,7 +9,7 @@ A game of classic Solitaire (aka _Klondike_) made with JavaFX
 
 ## Quick Start
 
-1. Open this project in your IDE of choice, and run `Main.java` as a normal Java app.
+1. Open this project in your IDE of choice, and **Run** as a normal Java app.
 2. Another option, is to your open Terminal / Powershell, go to this project's root directory and execute:
 ```bash
 ./gradlew run
@@ -17,7 +17,7 @@ A game of classic Solitaire (aka _Klondike_) made with JavaFX
 
 ## Bonus: Building Native Installer
 
-You can build a native installer, such as `.msi` for Windows, `.dmg` for MacOS, for JavaFX apps. The installer contains a slim JRE, your app, icons and shortcuts setup. You can _easily_ achieve that with `jpackage` tool, included in the JDK, **since JDK 15**! Learn more about [jpackage tool](https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html).
+You can build a native installer, such as `.msi` for Windows, `.dmg` for MacOS, for JavaFX apps. The installer contains a slim JRE, your app, icons, and uninstaller. You can _easily_ achieve that with `jpackage` tool, included in the JDK, **since JDK 15**! Learn more about [jpackage tool](https://docs.oracle.com/en/java/javase/20/docs/specs/man/jpackage.html).
 You'll need a few extra dependencies:
 
 
@@ -35,12 +35,12 @@ sudo xcode-select install
 
 ### How to Build Native installer (1 command ONLY)
 
-- Simply run this command below in your terminal/CMD, inside this project root directory.
+- Simply run this command below in your terminal/ powershell, inside this project root directory.
 ```bash
 ./gradlew clean build jpackage
 ```
 
-- If done, you'll find the installer for your OS inside folder `build/native/`. Building for other OS requires that target OS. Cannot cross compile.
+- When done, you'll find the installer for your OS inside folder `build/native/`. Building for other OS requires that target OS. Cannot cross compile.
 
 
 
