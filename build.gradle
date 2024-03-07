@@ -18,7 +18,7 @@ dependencies {
 }
 
 compileJava {
-    options.release.set(11)
+    options.release.set(17)
 }
 
 jar {
@@ -58,6 +58,7 @@ jpackage {
     mac {
         // Requires Mac OS, and XCode installed
         icon = "icons/mac-icon.icns"
+        type = ImageType.DMG
     }
 
     windows {
